@@ -74,7 +74,7 @@ if __name__ == "__main__":
             groups  = [d[i] for i in guesses]
             if len(set(groups)) == 1:
                 clear_terminal()
-                print(f"Correct!")
+                print(f"\033[32mCorrect!\033[0m")
                 print("Meaning: ", m[groups[0]-1])
                 for i in range(len(words)):
                     if words[i] in guesses:
@@ -88,7 +88,7 @@ if __name__ == "__main__":
   
             elif len(set(groups)) == 2:
                 clear_terminal()
-                print("One away!")
+                print("\033[94mOne away!\033[0m")
                 lives -= 1
                 if lives == 0:
                     print("Game Over! You have no lives left.")
