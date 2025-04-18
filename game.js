@@ -5,6 +5,7 @@ let selectedWords = [];
 let solvedGroups = [];
 let lives = 4;
 let solvedWords = [];
+let finished = false;
 
 function startGame() {
     const base64Input = document.getElementById("base64-input").value.trim();
@@ -46,6 +47,12 @@ function decodeBase64(base64String) {
         meaning: groupMeanings[index]
     }));
     return groups;
+}
+
+function shuffleWords() {
+    if (finished) return;
+    generateGrid();
+    resetSelections();
 }
 
 function generateGrid() {
@@ -128,9 +135,11 @@ function checkGuess() {
 
     if (solvedGroups.length === 4) {
         feedback.innerHTML = "🎉 You solved all groups!";
+        finished = true;
         disableAllTiles();
     } else if (lives === 0) {
         feedback.innerHTML = "💔 Game over!";
+        finished = true;
         revealAllGroups();
         disableAllTiles();
     }
