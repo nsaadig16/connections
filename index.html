@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Connections Game</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background-color: #f5f0e6;
+      color: #333;
+    }
+
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(4, 120px);
+      grid-gap: 10px;
+      justify-content: center;
+      margin: 20px auto;
+    }
+
+    .tile {
+      background-color: #f3e5ab;
+      color: black;
+      font-weight: bold;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .tile.selected {
+      border: 3px solid #444;
+      background-color: #ffe4b5;
+    }
+
+    .tile.solved {
+      cursor: default;
+      font-weight: bold;
+    }
+
+    .group-0 { background-color: #fca5a5; }
+    .group-1 { background-color: #fdba74; }
+    .group-2 { background-color: #fde68a; }
+    .group-3 { background-color: #86efac; }
+
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #555;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #feedback {
+      margin: 10px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Connections Game</h1>
+  <div id="grid"></div>
+  <div>
+    <div id="feedback"></div>
+    <p id="lives">Lives: <span id="lives-count"></span></p>
+    <button id="check-btn" onclick="checkGuess()">Check Guess</button>
+    <button id="shuffle-btn" onclick="shuffleWords()">🔀 Shuffle</button>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>

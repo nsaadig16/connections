@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 20px;
+}
+
+.word-button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f5f5dc; /* Beige color */
+    color: black; /* Text color black */
+    font-weight: bold; /* Make the text bold */
+}
+
+.word-button.selected {
+    background-color: #a5d6a7; /* Light green for selected */
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#feedback {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.success {
+    color: green;
+    background-color: #d4edda;
+}
+
+.warning {
+    color: #856404;
+    background-color: #fff3cd;
+}
+
+.error {
+    color: red;
+    background-color: #f8d7da;
+}
+
+.correct {
+    color: white;
+    background-color: #4caf50; /* Correct guess color */
+}
