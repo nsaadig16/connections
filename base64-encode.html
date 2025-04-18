@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Encoder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+    <h1>Base64 Encoder</h1>
+    <div id="input-container">
+        <h2>Enter your text to encode:</h2>
+        <textarea id="text-input" rows="6" cols="50"></textarea>
+        <button onclick="encodeToBase64()">Encode to Base64</button>
+    </div>
+
+    <div id="output-container" style="display: none;">
+        <h3>Encoded Base64 String:</h3>
+        <textarea id="base64-output" rows="6" cols="50" readonly></textarea>
+        <br>
+        <button onclick="copyToClipboard()">Copy to Clipboard</button>
+    </div>
+    <br></br>
+    <p><a href="index.html">Back to Game</a></p>
+
+    <script>
+        function encodeToBase64() {
+            const text = document.getElementById('text-input').value.trim();
+            if (text === "") {
+                alert("Please enter some text to encode.");
+                return;
+            }
+
+            const encoded = btoa(text);  // Base64 encode the input text
+            document.getElementById('base64-output').value = encoded;
+            document.getElementById('output-container').style.display = 'block';
+        }
+
+        function copyToClipboard() {
+            const outputField = document.getElementById('base64-output');
+            outputField.select();
+            document.execCommand('copy');
+            alert("Base64 string copied to clipboard!");
+        }
+    </script>
+</body>
+</html>

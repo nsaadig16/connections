@@ -13,6 +13,13 @@ function startGame() {
         return;
     }
 
+    // Check if the base64 input is valid using a regular expression
+    const base64Regex = /^[A-Za-z0-9+/=]+$/;
+    if (!base64Regex.test(base64Input) || base64Input.length % 4 !== 0) {
+        alert("Invalid base64 string. Please enter a valid base64 encoded string.");
+        return;
+    }
+
     // Decode the base64 input and initialize the game
     groups = decodeBase64(base64Input);
     words = groups.flatMap(group => group.words);
@@ -28,6 +35,7 @@ function startGame() {
     generateGrid();
     updateLives();
 }
+
 
 function decodeBase64(base64String) {
     const decodedData = atob(base64String);
@@ -122,73 +130,47 @@ function checkGuess() {
         feedback.innerHTML = "🎉 You solved all groups!";
         disableAllTiles();
     } else if (lives === 0) {
-        feedback.innerHTML = "💔 Game over! Here's the solution:";
+        feedback.innerHTML = "💔 Game over!";
         revealAllGroups();
         disableAllTiles();
-
-        // Hide "Check Guess" and "Shuffle Words" buttons, and show "Reset Game" button
-        document.getElementById("check-btn").style.display = "none";
-        document.getElementById("shuffle-btn").style.display = "none";
-        document.getElementById("reset-btn").style.display = "block"; // Show Reset button
     }
 }
 
-function updateLives() {
-    const hearts = "💔 ".repeat(4 - lives) + "❤️ ".repeat(lives);
-    document.getElementById("lives-count").textContent = hearts.trim();
+function revealAllGroups() {
+    const grid = document.getElementById("grid");
+    grid.innerHTML = ""; // Clear existing tiles
+
+    groups.forEach((group, index) => {
+        const groupContainer = document.createElement("div");
+        groupContainer.className = "group-container";
+
+        const groupTitle = document.createElement("h3");
+        groupTitle.textContent = group.meaning;
+        groupContainer.appendChild(groupTitle);
+
+        group.words.forEach(word => {
+            const tile = document.createElement("div");
+            tile.className = "tile solved";
+            tile.textContent = word;
+            groupContainer.appendChild(tile);
+        });
+
+        grid.appendChild(groupContainer);
+    });
 }
 
-function revealAllGroups() {
-    const tiles = document.querySelectorAll(".tile");
-    tiles.forEach(tile => {
-        const word = tile.textContent;
-        const groupIndex = wordMap[word] ?? groups.findIndex(g => g.meaning === word);
-        tile.className = "tile solved group-" + groupIndex;
-        tile.textContent = groups[groupIndex].meaning;
-    });
+function resetSelections() {
+    selectedWords = [];
+    const tiles = document.querySelectorAll(".tile.selected");
+    tiles.forEach(tile => tile.classList.remove("selected"));
+}
+
+function updateLives() {
+    const livesCount = document.getElementById("lives-count");
+    livesCount.innerHTML = "❤️ ".repeat(lives);
 }
 
 function disableAllTiles() {
     const tiles = document.querySelectorAll(".tile");
-    tiles.forEach(tile => tile.onclick = null);
+    tiles.forEach(tile => tile.classList.add("solved"));
 }
-
-function resetSelections() {
-    selectedWords.forEach(tile => tile.classList.remove("selected"));
-    selectedWords = [];
-}
-
-function shuffleWords() {
-    generateGrid();
-    resetSelections();
-}
-
-function resetGame() {
-    // Reset the game state
-    groups = [];
-    words = [];
-    wordMap = {};
-    selectedWords = [];
-    solvedGroups = [];
-    solvedWords = [];
-    lives = 4;
-
-    // Clear the input field
-    document.getElementById("base64-input").value = '';
-
-    // Clear feedback
-    document.getElementById("feedback").innerHTML = '';
-
-    // Show the input screen again
-    document.getElementById("input-screen").style.display = "block";
-    document.getElementById("game-screen").style.display = "none";
-
-    // Reset the visibility of buttons
-    document.getElementById("check-btn").style.display = "inline-block";
-    document.getElementById("shuffle-btn").style.display = "inline-block";
-    document.getElementById("reset-btn").style.display = "none";
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("reset-btn").style.display = "none"; // Ensure reset button is hidden initially
-});

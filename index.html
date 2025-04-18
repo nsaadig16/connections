@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Connections Game</h1>
+    <h1>Make Your Connections!</h1>
     <div id="input-screen">
         <h2>Enter the base64 encoded input:</h2>
         <textarea id="base64-input" rows="6" cols="50"></textarea>
-        <button id="startGameBtn" onclick="startGame()">Start Game</button>
+        <button onclick="startGame()">Start Game</button>
+        <p><a href="base64-encode.html">Click here to encode text into Base64</a></p>  <!-- Link added here -->
     </div>
+    
 
     <div id="game-screen" style="display:none;">
         <div id="grid"></div>
@@ -20,8 +22,7 @@
             <div id="feedback"></div>
             <p id="lives">Lives: <span id="lives-count">❤️ ❤️ ❤️ ❤️</span></p>
             <button id="check-btn" onclick="checkGuess()">Check Guess</button>
-            <button id="reset-btn" style="display:none;" onclick="resetGame()">Reset Game</button>
-            <button id="shuffle-btn" onclick="shuffleWords()">Shuffle Words</button>
+            <button onclick="shuffleWords()">Shuffle Words</button>
         </div>
     </div>
 

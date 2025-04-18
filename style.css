@@ -129,6 +129,7 @@ h1 {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
+    user-select: none; /* Prevent text selection */
 }
 
 .tile.selected {
@@ -139,7 +140,9 @@ h1 {
     background-color: #90ee90;
     cursor: default;
     text-align: center;
+    user-select: none; /* Prevent text selection */
 }
+
 
 .tile:hover {
     transform: scale(1.05);
@@ -202,4 +205,29 @@ button:hover {
 
 #shuffle-btn:hover {
     background-color: #e64a19;
+}
+
+/* Grouping the words when the game is lost */
+.group-container {
+    margin: 20px 0;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.group-container h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.group-container .tile {
+    margin: 5px;
+    font-size: 1rem;
+    background-color: #e1f5fe;
+    padding: 10px;
+    border-radius: 5px;
+    color: #333;
+    text-align: center;
 }
