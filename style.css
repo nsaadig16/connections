@@ -165,16 +165,6 @@ h1 {
     justify-content: center;
 }
 
-#lives-count span {
-    font-size: 1.5rem;
-    color: gray; /* Default gray color for unbroken hearts */
-    margin: 0 5px;
-}
-
-#lives-count span.heart {
-    color: red; /* Red color for hearts that are still there */
-}
-
 button {
     padding: 10px 20px;
     font-size: 1rem;
@@ -272,28 +262,6 @@ button:hover {
     margin-bottom: 12px;
     font-weight: bold;
     font-size: 0.95rem;
-}
-
-#daily-code-container {
-    display: block;
-    background-color: #e9e9e9;
-    padding: 8px;
-    border-radius: 4px;
-    font-family: monospace;
-    overflow-wrap: break-word;
-    margin-bottom: 12px;
-    font-size: 0.85rem;
-    color: #555;
-    max-height: 40px;
-    overflow: hidden;
-}
-
-#daily-code-preview {
-    display: inline-block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 100%;
 }
 
 #play-daily-btn {
