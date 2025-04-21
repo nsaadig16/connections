@@ -11,32 +11,37 @@ function startGame() {
     const base64Input = document.getElementById("base64-input").value.trim();
     if (!base64Input) {
         alert("Please enter a base64 encoded string.");
-        return;
+        return false; // Return false if no input
     }
 
     // Check if the base64 input is valid using a regular expression
     const base64Regex = /^[A-Za-z0-9+/=]+$/;
     if (!base64Regex.test(base64Input) || base64Input.length % 4 !== 0) {
         alert("Invalid base64 string. Please enter a valid base64 encoded string.");
-        return;
+        return false; // Return false if invalid input
     }
 
     // Decode the base64 input and initialize the game
-    groups = decodeBase64(base64Input);
-    words = groups.flatMap(group => group.words);
-    wordMap = {};
-    groups.forEach((group, idx) => {
-        group.words.forEach(word => {
-            wordMap[word] = idx;
+    try {
+        groups = decodeBase64(base64Input);
+        words = groups.flatMap(group => group.words);
+        wordMap = {};
+        groups.forEach((group, idx) => {
+            group.words.forEach(word => {
+                wordMap[word] = idx;
+            });
         });
-    });
 
-    document.getElementById("input-screen").style.display = "none";
-    document.getElementById("game-screen").style.display = "block";
-    generateGrid();
-    updateLives();
+        document.getElementById("input-screen").style.display = "none";
+        document.getElementById("game-screen").style.display = "block";
+        generateGrid();
+        updateLives();
+        return true; // Return true if game started successfully
+    } catch (error) {
+        alert("Error starting game: " + error.message);
+        return false; // Return false if there was an error
+    }
 }
-
 
 function decodeBase64(base64String) {
     const decodedData = atob(base64String);

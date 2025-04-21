@@ -6,27 +6,91 @@
     <title>Connections Game</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="./favicon.png?v=1" />
+    <!-- Load the daily challenge data -->
+    <script src="daily-challenge.js"></script>
 </head>
 <body>
     <h1>Make Your Connections!</h1>
+    
+    <!-- Daily Game Code Box -->
+    <div id="daily-game-container">
+        <h2>Today's Challenge <span id="challenge-date"></span></h2>
+        <div id="daily-code-box">
+            <p>Try today's daily connection puzzle!</p>
+            <span id="daily-code" style="display:none"></span>
+            <button id="play-daily-btn" onclick="playDailyGame()">Play Now</button>
+        </div>
+    </div>
+
+    <br>
     <div id="input-screen">
         <h2>Enter the base64 encoded input:</h2>
         <textarea id="base64-input" rows="6" cols="50"></textarea>
-        <button onclick="startGame()">Start Game</button>
-        <p><a href="base64-encode.html">Click here to encode text into Base64</a></p>  <!-- Link added here -->
+        <button onclick="startCustomGame()" id="startGameBtn">Start Game</button>
+        <p><a href="base64-encode.html">Click here to encode text into Base64</a></p>
     </div>
-    
 
     <div id="game-screen" style="display:none;">
         <div id="grid"></div>
         <div>
             <div id="feedback"></div>
-            <p id="lives">Lives: <span id="lives-count">❤️ ❤️ ❤️ ❤️</span></p>
-            <button id="check-btn" onclick="checkGuess()">Check Guess</button>
-            <button onclick="shuffleWords()">Shuffle Words</button>
+            <p id="lives"><span id="lives-count">❤️ ❤️ ❤️ ❤️</span></p>
+            <div class="button-container">
+                <button onclick="shuffleWords()" id="shuffle-btn"></button>
+                <button id="check-btn" onclick="checkGuess()">Check Guess</button>
+            </div>
         </div>
     </div>
 
     <script src="game.js"></script>
+    <script>
+        // Load the daily challenge code from the imported file when the page loads
+        window.onload = function() {
+            if (typeof DAILY_CHALLENGE !== 'undefined') {
+                if (DAILY_CHALLENGE.code) {
+                    document.getElementById('daily-code').textContent = DAILY_CHALLENGE.code;
+                }
+                
+                if (DAILY_CHALLENGE.date) {
+                    // Format the date nicely
+                    const challengeDate = new Date(DAILY_CHALLENGE.date);
+                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    const formattedDate = challengeDate.toLocaleDateString('en-US', options);
+                    
+                    // Display the date
+                    document.getElementById('challenge-date').textContent = `(${formattedDate})`;
+                }
+            }
+        };
+        
+        function playDailyGame() {
+            // Get the daily code and set it to the input
+            const codeElement = document.getElementById('daily-code');
+            document.getElementById('base64-input').value = codeElement.textContent;
+            
+            // Hide the daily game container
+            document.getElementById('daily-game-container').style.display = 'none';
+            
+            // Start the game
+            startGame();
+        }
+        
+        function startCustomGame() {
+            // Get the input value
+            const inputValue = document.getElementById("base64-input").value.trim();
+            
+            // Only hide the daily game container if the game successfully starts
+            if (inputValue) {
+                // Call the game.js startGame function
+                // This will return true if the game starts successfully
+                if (startGame()) {
+                    // Hide the daily game container only if the game starts
+                    document.getElementById('daily-game-container').style.display = 'none';
+                }
+            } else {
+                alert("Please enter a base64 encoded string.");
+            }
+        }
+    </script>
 </body>
 </html>
