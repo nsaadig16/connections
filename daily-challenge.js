@@ -1,5 +1,5 @@
 // This file contains the daily challenge code
 const DAILY_CHALLENGE = {
-    code: "cGVhY2UsaGFuZCx6b2RpYWMsdHJhZmZpYwptYXJvb24sYmxpbmsscGlsb3RzLGRpcmVjdGlvbgpjbG9uZSxkb3VibGUsY29weSxmYWNzaW1pbGUKbmFpbCxoZWVwLHF1aWQsbmFrZQpfX18gc2lnbixiYW5kcyB3aXRoIGEgbnVtYmVyLCJyZXBsaWNhIixhbmltYWxzIHdpdGggdGhlICJzIiByZW1vdmVk",
-    date: "2025-04-23"
+    code: "Y2F0LG1hbixjZCx0b3VjaApjbG92ZXIsbG92ZSxqZXdlbCxibGFkZQpraW5kLGNvb2wsbmVhdCxjdXRlCnNlcmlhbCxwYXJhbGxlbCxidXMsamFjawpjb21tYW5kcyBpbiBsaW51eCxvdGhlciBuYW1lcyBmb3IgY2FyZCBzdWl0cywibmljZSIsUEMgcG9ydHM=",
+    date: "2025-04-25"
 };
